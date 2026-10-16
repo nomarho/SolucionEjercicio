@@ -64,3 +64,21 @@ head(rownames(Animals2), 10)
 colnames(Animals2)
 ```
 
+### d) Usa la función intersect y almacena en la variable commonAnimals los aminales(filas) que aparezcan en ambos conjuntos.
+
+```{r}
+# "intersect" para encontrar los animales que aparecen en ambos conjuntos de datos y los almacenamos en la variable commonAnimals:
+
+# Primero extraemos los nombres de las filas de ambos dataframes
+filas_mammals <- rownames(mammals)
+filas_animals2 <- rownames(Animals2)
+
+# Luego aplicamos intersect sobre las listas de nombres
+# intersect directamente sobre los dataframes no es válido ya que difieren en número filas
+commonAnimals <- intersect(filas_mammals, filas_animals2)
+commonAnimals
+length(commonAnimals) #número animales comunes 58
+
+
+```
+
