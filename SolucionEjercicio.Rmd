@@ -9,18 +9,104 @@ output: html_document
 ### a) Mira la las características de ambos conjuntos usando la ayuda.
 
 ```{r}
-#Consultamos la ayuda de mammals:
+
+# Consultamos la ayuda de mammals:
 library(MASS)
 ?mammals
 
-#Consultamos la ayuda de Animals2
+# Consultamos la ayuda de Animals2:
 library(robustbase)
 ?Animals2
+
 ```
+
 
 ### b) Usa las funciones dim, head, tail, str para una primera visión de los conjuntos de datos.
 
 ```{r}
 
+# Dimensiones
+dim(mammals)    #62 filas/instancias, 2 columnas /variables
+dim(Animals2)   #65 filas/instancias, 2 columnas /variables
+
+# Primeras filas, por defecto son 6
+primerasfilas<- head(mammals)
+primerasfilas
+primerasfilas2<- head(Animals2)
+primerasfilas2
+
+View(mammals)
+View(Animals2)
+
+# Últimas filas
+tail(mammals)
+tail(Animals2)
+
+# Estructura interna de cada conjunto de datos
+str(mammals)
+str(Animals2)
+
 ```
+### c) Muestra los nombres de las filas y las columnas (rownames, colnames)
+
+
+```{r}
+# Nombres de las 10 primeras filas por ejemplo, y columnas:
+# mammals:
+head(rownames(mammals), 10)
+colnames(mammals)
+
+# Nombres de filas y columnas:
+# Animals2:
+head(rownames(Animals2), 10)
+#rownames(Animals2) aparecerían las 65 filas, ojo rownames(Animals2,10) no es válido, sólo acepta un argumento
+colnames(Animals2)
+```
+
+### d) Usa la función intersect y almacena en la variable commonAnimals los aminales(filas) que aparezcan en ambos conjuntos.
+
+```{r}
+# "intersect" para encontrar los animales que aparecen en ambos conjuntos de datos y los almacenamos en la variable commonAnimals:
+
+# Primero extraemos los nombres de las filas de ambos dataframes
+filas_mammals <- rownames(mammals)
+filas_animals2 <- rownames(Animals2)
+
+# Luego aplicamos intersect sobre las listas de nombres
+# intersect directamente sobre los dataframes no es válido ya que difieren en número filas
+commonAnimals <- intersect(filas_mammals, filas_animals2)
+commonAnimals
+length(commonAnimals) #número animales comunes 58
+
+
+```
+
+### e) Usa *setdiff* para averiguar qué animales no están en ambos conjuntos "a la vez". ¿Cuántos son ?. ¿Qué tipo de animales son?
+
+```{r}
+
+# Animales en mammals que no están en Animals2
+# busca lo que está en el primer conjunto pero falta en el segundo.
+a <- setdiff(rownames(mammals), rownames(Animals2)) 
+a  # 4
+cat("Animales:", a)
+
+# Animales en Animals2 que no están en mammals
+# al contrario
+b <- setdiff(rownames(Animals2), rownames(mammals))
+b  # 7 animales
+cat("Animales:", paste(b, collapse = ", "))
+
+#animales no comunes, en total 11
+animales_no_comunes <- c(a, b)
+animales_no_comunes
+
+
+```
+### f) Determina las diferencias entre los animales que no aparecen en ambos conjuntos.
+
+```{r}
+Animals2[b, ] #muestra aqullas filas de Animals2 que se guardaron en b, y toddas las columnas
+```
+
 
