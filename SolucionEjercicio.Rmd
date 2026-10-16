@@ -49,3 +49,18 @@ str(Animals2)
 ```
 
 
+### c) Muestra los nombres de las filas y las columnas (rownames, colnames)
+
+```{r}
+# Nombres de las 10 primeras filas por ejemplo, y columnas:
+# mammals:
+head(rownames(mammals), 10)
+colnames(mammals)
+
+# Nombres de filas y columnas:
+# Animals2:
+head(rownames(Animals2), 10)
+#rownames(Animals2) aparecerían las 65 filas, ojo rownames(Animals2,10) no es válido, sólo acepta un argumento
+colnames(Animals2)
+```
+
